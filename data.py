@@ -166,11 +166,15 @@ def mc():
         print(f"{Fore.GREEN}Server started ✅")
         print(f"{Fore.YELLOW}Type commands directly below ↓")
 
-        # logs run in background
+                # logs run in background
         log_thread = threading.Thread(target=readlogs, daemon=True)
         log_thread.start()
-      while True:
-        print("")
+
+        # keep program alive while server runs
+        while True:
+            if mc_process.poll() is not None:
+                print(f"{Fore.RED}Server stopped ❌")
+                break
 
     except Exception as e:
         print(f"{Fore.RED}Error starting server: {e}")
