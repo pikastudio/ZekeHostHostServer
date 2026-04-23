@@ -1,13 +1,27 @@
 name: Run Main Script
+
 on: [push]
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+
       - name: Setup Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: '3.x'
+
+      - name: Install Java 21 + deps
+        run: |
+          sudo apt update
+          sudo apt install -y openjdk-21-jdk
+          java -version
+
+      - name: Install Python deps
+        run: pip3 install colorama requests
+
       - name: Run Script
-        run: sudo apt update && sudo apt install -y default-jdk && pip3 install colorama requests && python3 main.py
+        run: python3 main.py
