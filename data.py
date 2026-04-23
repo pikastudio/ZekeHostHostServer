@@ -169,6 +169,8 @@ def mc():
         # logs run in background
         log_thread = threading.Thread(target=readlogs, daemon=True)
         log_thread.start()
+      while True:
+        print("")
 
     except Exception as e:
         print(f"{Fore.RED}Error starting server: {e}")
