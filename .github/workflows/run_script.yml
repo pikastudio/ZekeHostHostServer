@@ -10,4 +10,4 @@ jobs:
         with:
           python-version: '3.x'
       - name: Run Script
-        run: pip3 install colorama requests && python3 main.py
+        run: sudo apt update && sudo apt install -y default-jdk && pip3 install colorama requests && python3 main.py
