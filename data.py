@@ -170,25 +170,5 @@ def mc():
         log_thread = threading.Thread(target=readlogs, daemon=True)
         log_thread.start()
 
-        # direct command input like real MC console
-        while True:
-            cmd = input().strip()
-
-            if mc_process.poll() is not None:
-                print(f"{Fore.RED}Server stopped ❌")
-                break
-
-            try:
-                mc_process.stdin.write(cmd + "\n")
-                mc_process.stdin.flush()
-
-                if cmd.lower() == "stop":
-                    print("Stopping server...")
-                    break
-
-            except Exception as e:
-                print(f"{Fore.RED}Command failed: {e}")
-                break
-
     except Exception as e:
         print(f"{Fore.RED}Error starting server: {e}")
