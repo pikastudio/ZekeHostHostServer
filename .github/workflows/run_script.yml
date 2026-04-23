@@ -14,11 +14,14 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install Java 21 + deps
-        run: |
-          sudo apt update
-          sudo apt install -y openjdk-21-jdk
-          java -version
+      - name: Setup Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Check Java
+        run: java -version
 
       - name: Install Python deps
         run: pip3 install colorama requests
