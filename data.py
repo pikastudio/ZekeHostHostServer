@@ -148,7 +148,7 @@ def mc():
     try:
         mc_process = subprocess.Popen(
             [
-                r"/usr/lib/jvm/java-17-openjdk-amd64/bin/java",
+                "java",
                 "-Xmx4G",
                 "-Xms2G",
                 "-jar",
