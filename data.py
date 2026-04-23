@@ -148,7 +148,7 @@ def mc():
     try:
         mc_process = subprocess.Popen(
             [
-                r"C:\Program Files\Eclipse Adoptium\jdk-21.0.8.9-hotspot\bin\java.exe",
+                r"/usr/lib/jvm/java-17-openjdk-amd64/bin/java",
                 "-Xmx4G",
                 "-Xms2G",
                 "-jar",
