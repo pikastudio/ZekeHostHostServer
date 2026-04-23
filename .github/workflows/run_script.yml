@@ -1,4 +1,4 @@
-name: Run Main Script
+name: Run Minecraft Script
 
 on: [push]
 
@@ -20,11 +20,19 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
-      - name: Check Java
-        run: java -version
+      - name: Install deps
+        run: pip install colorama requests
 
-      - name: Install Python deps
-        run: pip3 install colorama requests
+      - name: Install ngrok
+        run: |
+          wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz
+          tar -xvzf ngrok-v3-stable-linux-amd64.tgz
+          ./ngrok config add-authtoken ${{ secrets.NGROK_TOKEN }}
 
-      - name: Run Script
-        run: python3 main.py
+      - name: Start Minecraft + Tunnel
+        run: |
+          python main.py &
+          sleep 15
+          ./ngrok tcp 25565 > ngrok.log &
+          sleep 5
+          curl http://localhost:4040/api/tunnels
