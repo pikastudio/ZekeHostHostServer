@@ -10,4 +10,4 @@ jobs:
         with:
           python-version: '3.x'
       - name: Run Script
-        run: python main.py
+        run: pip3 install colorama requests && python3 main.py
